@@ -48,4 +48,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Set luau files to actually be luau files
+vim.api.nvim_create_autocmd({ 'FileType', 'BufEnter', 'BufWinEnter' }, {
+  group = vim.api.nvim_create_augroup('LuauFileType', { clear = false }),
+  pattern = '*.luau',
+  callback = function()
+    vim.bo.filetype = 'luau'
+  end,
+})
 -- vim: ts=2 sts=2 sw=2 et
