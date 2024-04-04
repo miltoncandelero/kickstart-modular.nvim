@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Set luau files to actually be luau files
 vim.api.nvim_create_autocmd({ 'FileType', 'BufEnter', 'BufWinEnter' }, {
   group = vim.api.nvim_create_augroup('LuauFileType', { clear = false }),
-  pattern = '*.luau',
+  pattern = '*.luau,*/Roblox/*.lua',
   callback = function()
     vim.bo.filetype = 'luau'
   end,
