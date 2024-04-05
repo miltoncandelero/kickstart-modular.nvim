@@ -71,6 +71,7 @@ require('lazy').setup({
   -- TODO: Move this to it's own file
   {
     'lopi-py/luau-lsp.nvim',
+    lazy = false,
     -- opts = {
     --   ...
     -- },
