@@ -97,6 +97,29 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'echasnovski/mini.map',
+    version = '*',
+    lazy = false,
+    -- cmd = { 'open' },
+    -- keys = {
+
+    -- vim.keymap.set('n', '<Leader>mc', MiniMap.close)
+    -- vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus)
+    -- vim.keymap.set('n', '<Leader>mo', MiniMap.open)
+    -- vim.keymap.set('n', '<Leader>mr', MiniMap.refresh)
+    -- vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side)
+    -- vim.keymap.set('n', '<Leader>mt', MiniMap.toggle)
+    -- { mode = 'n', '<Leader>Mo', '<cmd>open<cr>', desc = 'Minimap Open' },
+    -- },
+    config = function()
+      local MiniMap = require 'mini.map'
+      MiniMap.setup()
+
+      vim.keymap.set('n', '<Leader>Mo', MiniMap.open, { desc = 'Minimap Open' })
+      vim.keymap.set('n', '<Leader>Mc', MiniMap.close, { desc = 'Minimap Close' })
+    end,
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
