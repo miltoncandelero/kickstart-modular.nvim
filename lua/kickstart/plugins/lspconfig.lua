@@ -146,8 +146,6 @@ return {
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
-        --
-        luau_lsp = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -162,8 +160,7 @@ return {
             },
           },
         },
-      }
-
+      } --
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -189,6 +186,40 @@ return {
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+          end,
+          ['luau_lsp'] = function()
+            require('luau-lsp').setup {
+              fflags = {
+                sync = false,
+              },
+              server = {
+                capabilities = capabilities,
+                settings = {
+                  ['luau-lsp'] = {
+                    require = {
+                      mode = 'relativeToFile',
+                      directoryAliases = {
+                        ['@lune'] = '~/.lune/.typedefs/0.8.2/',
+                      },
+                      completion = {
+                        imports = { enabled = true },
+                        fillCallArguments = true,
+                        autocompleteEnd = true,
+                      },
+                    },
+                  },
+                },
+              },
+              sourcemap = {
+                enabled = true,
+                autogenerate = true,
+                rojo_project_file = 'default.project.json',
+              },
+              types = {
+                roblox = true,
+                roblox_security_level = 'PluginSecurity',
+              },
+            }
           end,
         },
       }
